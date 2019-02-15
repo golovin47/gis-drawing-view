@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.gis.drawingview.DrawingView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawing_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:paintColor="@android:color/holo_orange_dark"
+    app:lineThickness="20"
+    android:fitsSystemWindows="true"
+    app:backgroundColor="@android:color/holo_blue_bright"/>

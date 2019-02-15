@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="DrawingView">
+    <attr name="paintColor" format="color"/>
+    <attr name="lineThickness" format="float"/>
+    <attr name="backgroundColor" format="color"/>
+  </declare-styleable>
+</resources>
