@@ -34,10 +34,6 @@ class DrawingView : View {
 
   private val DEFAULT_THICKNESS = 10f
 
-  private var previousOrientationAngle: Int = -1
-  private var previousWidth: Int = -1
-  private var previousHeight: Int = -1
-
   private var canvasBackgroundColor: Int = Color.WHITE
   private var drawnPaths: ArrayList<DrawnPath> = arrayListOf()
   private val drawingPaint = Paint().apply {
@@ -102,9 +98,6 @@ class DrawingView : View {
     }
 
     val savedState = DrawingViewState(superState)
-    savedState.previousOrientationAngle = previousOrientationAngle
-    savedState.previousWidth = previousWidth
-    savedState.previousHeight = previousHeight
     savedState.drawnPaths = drawnPaths
     savedState.savedBackgroundColor = canvasBackgroundColor
     savedState.savedPaintColor = drawingPaint.color
@@ -115,9 +108,6 @@ class DrawingView : View {
   override fun onRestoreInstanceState(state: Parcelable?) {
     if (state is DrawingViewState) {
       super.onRestoreInstanceState(state.superState)
-      previousOrientationAngle = state.previousOrientationAngle
-      previousWidth = state.previousWidth
-      previousHeight = state.previousHeight
       drawnPaths = state.drawnPaths
       canvasBackgroundColor = state.savedBackgroundColor
       drawingPaint.color = state.savedPaintColor
@@ -129,192 +119,8 @@ class DrawingView : View {
   override fun onDraw(canvas: Canvas?) {
     super.onDraw(canvas)
 
-    applyOriginalOrientation()
-    savePreviousSpecs()
     drawBackgroundColor(canvas)
     drawPaths(canvas)
-  }
-
-  private fun applyOriginalOrientation() {
-    val newAngle = display.rotation
-    val heightDiff = previousWidth - height
-    val widthDiff = previousHeight - width
-
-    if (previousOrientationAngle == newAngle) return
-
-    when (previousOrientationAngle) {
-
-      Surface.ROTATION_0 ->
-        for (path in drawnPaths) {
-          for (fraction in path.fractionsList) {
-            when (newAngle) {
-
-              Surface.ROTATION_90 -> {
-                val sx = fraction.startX
-                val sy = fraction.startY
-                val ex = fraction.endX
-                val ey = fraction.endY
-                fraction.startX = sy - widthDiff
-                fraction.startY = height - sx
-                fraction.endX = ey - widthDiff
-                fraction.endY = height - ex
-              }
-
-              Surface.ROTATION_180 -> {
-                val sx = fraction.startX
-                val sy = fraction.startY
-                val ex = fraction.endX
-                val ey = fraction.endY
-                fraction.startX = width - sx
-                fraction.startY = height - sy
-                fraction.endX = width - ex
-                fraction.endY = height - ey
-              }
-
-              Surface.ROTATION_270 -> {
-                val sx = fraction.startX
-                val sy = fraction.startY
-                val ex = fraction.endX
-                val ey = fraction.endY
-                fraction.startX = width - (sy - widthDiff)
-                fraction.startY = sx - heightDiff
-                fraction.endX = width - (ey - widthDiff)
-                fraction.endY = ex - heightDiff
-              }
-            }
-          }
-        }
-
-      Surface.ROTATION_90 ->
-        for (path in drawnPaths) {
-          for (fraction in path.fractionsList) {
-            when (newAngle) {
-
-              Surface.ROTATION_0 -> {
-                val sx = fraction.startX
-                val sy = fraction.startY
-                val ex = fraction.endX
-                val ey = fraction.endY
-
-                fraction.startX = width - (sy - widthDiff)
-                fraction.startY = sx - heightDiff
-                fraction.endX = width - (ey - widthDiff)
-                fraction.endY = ex - heightDiff
-              }
-
-              Surface.ROTATION_180 -> {
-                val sx = fraction.startX
-                val sy = fraction.startY
-                val ex = fraction.endX
-                val ey = fraction.endY
-                fraction.startX = sy - widthDiff
-                fraction.startY = height - (sx - heightDiff)
-                fraction.endX = ey - widthDiff
-                fraction.endY = height - (ex - heightDiff)
-              }
-
-              Surface.ROTATION_270 -> {
-                val sx = fraction.startX
-                val sy = fraction.startY
-                val ex = fraction.endX
-                val ey = fraction.endY
-                fraction.startX = width - sx
-                fraction.startY = height - sy
-                fraction.endX = width - ex
-                fraction.endY = height - ey
-              }
-            }
-          }
-        }
-
-      Surface.ROTATION_180 ->
-        for (path in drawnPaths) {
-          for (fraction in path.fractionsList) {
-            when (newAngle) {
-
-              Surface.ROTATION_0 -> {
-                val sx = fraction.startX
-                val sy = fraction.startY
-                val ex = fraction.endX
-                val ey = fraction.endY
-                fraction.startX = width - sx
-                fraction.startY = height - sy
-                fraction.endX = width - ex
-                fraction.endY = height - ey
-              }
-
-              Surface.ROTATION_90 -> {
-                val sx = fraction.startX
-                val sy = fraction.startY
-                val ex = fraction.endX
-                val ey = fraction.endY
-                fraction.startX = width - sy
-                fraction.startY = sx
-                fraction.endX = width - ey
-                fraction.endY = ex
-              }
-
-              Surface.ROTATION_270 -> {
-                val sx = fraction.startX
-                val sy = fraction.startY
-                val ex = fraction.endX
-                val ey = fraction.endY
-                fraction.startX = sy
-                fraction.startY = height - sx
-                fraction.endX = ey
-                fraction.endY = height - ex
-              }
-            }
-          }
-        }
-
-      Surface.ROTATION_270 ->
-        for (path in drawnPaths) {
-          for (fraction in path.fractionsList) {
-            when (newAngle) {
-
-              Surface.ROTATION_0 -> {
-                val sx = fraction.startX
-                val sy = fraction.startY
-                val ex = fraction.endX
-                val ey = fraction.endY
-                fraction.startX = sy - widthDiff
-                fraction.startY = height - sx
-                fraction.endX = ey - widthDiff
-                fraction.endY = height - ex
-              }
-
-              Surface.ROTATION_90 -> {
-                val sx = fraction.startX
-                val sy = fraction.startY
-                val ex = fraction.endX
-                val ey = fraction.endY
-                fraction.startX = width - sx
-                fraction.startY = height - sy
-                fraction.endX = width - ex
-                fraction.endY = height - ey
-              }
-
-              Surface.ROTATION_180 -> {
-                val sx = fraction.startX
-                val sy = fraction.startY
-                val ex = fraction.endX
-                val ey = fraction.endY
-                fraction.startX = sy
-                fraction.startY = height - sx
-                fraction.endX = ey
-                fraction.endY = height - ex
-              }
-            }
-          }
-        }
-    }
-  }
-
-  private fun savePreviousSpecs() {
-    previousOrientationAngle = display.rotation
-    previousWidth = width
-    previousHeight = height
   }
 
   private fun drawBackgroundColor(canvas: Canvas?) {
@@ -404,9 +210,6 @@ class DrawingView : View {
 
 
 private class DrawingViewState : BaseSavedState {
-  var previousOrientationAngle: Int = 0
-  var previousWidth: Int = 0
-  var previousHeight: Int = 0
   var drawnPaths: ArrayList<DrawnPath> = arrayListOf()
   var savedBackgroundColor: Int = 0
   var savedPaintColor: Int = 0
@@ -416,9 +219,6 @@ private class DrawingViewState : BaseSavedState {
 
   @RequiresApi(Build.VERSION_CODES.N)
   constructor(source: Parcel, loader: ClassLoader) : super(source, loader) {
-    previousOrientationAngle = source.readInt()
-    previousWidth = source.readInt()
-    previousHeight = source.readInt()
     drawnPaths = source.readArrayList(loader) as ArrayList<DrawnPath>
     savedBackgroundColor = source.readInt()
     savedPaintColor = source.readInt()
@@ -439,9 +239,6 @@ private class DrawingViewState : BaseSavedState {
 
   override fun writeToParcel(out: Parcel, flags: Int) {
     super.writeToParcel(out, flags)
-    out.writeInt(previousOrientationAngle)
-    out.writeInt(previousWidth)
-    out.writeInt(previousHeight)
     out.writeList(drawnPaths)
     out.writeInt(savedBackgroundColor)
     out.writeInt(savedPaintColor)
