@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'signing'
 apply plugin: 'com.bmuschko.nexus'
 
-group = 'com.gis.drawingview'
+group = 'com.github.golovin47.drawingview'
 version = '1.0.0'
 
 android {
