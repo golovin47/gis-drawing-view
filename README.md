@@ -1,6 +1,5 @@
 # Drawing View
-​
-This is an implementation of a view which you can use to draw anything you want on it. 
+​This is an implementation of a view which you can use to draw anything you want on it. 
 ## How to install 
 ​You can download it as an AAR [here](http://central.maven.org/maven2/com/github/golovin47/drawingview/drawingview/1.0.0/drawingview-1.0.0.aar).
 
