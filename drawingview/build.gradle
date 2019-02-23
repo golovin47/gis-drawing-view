@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'signing'
 apply plugin: 'com.bmuschko.nexus'
 
+group = 'com.gis.drawingview'
+version = '1.0.0'
+
 android {
     compileSdkVersion 28
 
@@ -11,7 +14,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName version
     }
 
     buildTypes {
