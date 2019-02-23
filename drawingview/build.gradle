@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'signing'
 apply plugin: 'com.bmuschko.nexus'
 
 android {
@@ -61,12 +62,6 @@ modifyPom {
             }
         }
     }
-}
-
-extraArchive {
-    sources = false
-    tests = false
-    javadoc = false
 }
 
 nexus {
