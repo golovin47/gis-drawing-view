@@ -41,8 +41,8 @@ modifyPom {
 
         scm {
             url 'https://github.com/golovin47/gis-drawing-view'
-            connection 'scm:git@github.com:golovin47/gis-drawing-view'
-            developerConnection 'scm:git@github.com:golovin47/gis-drawing-view'
+            connection 'scm:git@github.com:golovin47/gis-drawing-view.git'
+            developerConnection 'scm:git@github.com:golovin47/gis-drawing-view.git'
         }
 
         licenses {
