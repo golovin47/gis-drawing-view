@@ -1,5 +1,9 @@
-# Drawing View
+# DrawingView
 This is an implementation of a view which you can use to draw anything you want on it. 
+
+<a href="https://github.com/golovin47/gis-drawing-view">
+<img align="center" src="https://github.com/golovin47/gis-drawing-view/blob/master/DrawingView.gif" width="50%" height="50%"/></a>
+
 ## How to install 
 You can download it as an AAR [here](http://central.maven.org/maven2/com/github/golovin47/drawingview/drawingview/1.0.0/drawingview-1.0.0.aar).
 
@@ -64,3 +68,6 @@ You can easily get bitmap of everything, DrawingView contains:
 ```kotlin
 getBitmap()
 ```
+
+## License
+DrawingView is released under the MIT license. Visit https://opensource.org/licenses/MIT for details.
