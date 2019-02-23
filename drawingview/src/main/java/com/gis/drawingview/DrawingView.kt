@@ -7,7 +7,6 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.MotionEvent.*
-import android.view.Surface
 import android.view.View
 import android.view.View.BaseSavedState
 import androidx.annotation.ColorRes
@@ -205,6 +204,17 @@ class DrawingView : View {
       drawnPaths.removeAt(drawnPaths.size - 1)
       invalidate()
     }
+  }
+
+  /**
+   * Get bitmap of everything that was drawn on this view
+   */
+
+  fun getBitmap(): Bitmap {
+    val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(bitmap)
+    draw(canvas)
+    return bitmap
   }
 }
 

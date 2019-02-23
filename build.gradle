@@ -9,6 +9,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$Version.androidGradle"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$Version.kotlin"
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
     }
 }
 

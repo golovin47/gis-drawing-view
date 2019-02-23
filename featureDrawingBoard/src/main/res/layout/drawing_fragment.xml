@@ -6,7 +6,6 @@
     android:id="@+id/drawing_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:paintColor="@android:color/holo_orange_dark"
+    app:paintColor="@android:color/black"
     app:lineThickness="20"
-    android:fitsSystemWindows="true"
-    app:backgroundColor="@android:color/holo_blue_bright"/>
+    app:backgroundColor="@android:color/white"/>

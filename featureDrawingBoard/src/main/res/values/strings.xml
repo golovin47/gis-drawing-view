@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FeatureDrawingBoard</string>
+  <string name="paint_color">Paint color</string>
+  <string name="canvas_color">Canvas color</string>
+  <string name="undo">Undo</string>
+  <string name="thickness">Thickness</string>
 </resources>
